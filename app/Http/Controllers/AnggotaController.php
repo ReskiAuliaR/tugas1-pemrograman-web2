@@ -77,5 +77,11 @@ class AnggotaController extends Controller
         
         return redirect()->route('index')->with('success', 'Data anggota berhasil diperbarui');
     }       
+
+    public function destroy($id)
+    {
+        Anggota::destroy($id);
+        return redirect()->route('index')->with('success', 'Data anggota berhasil dihapus');
+    }
     
 }
