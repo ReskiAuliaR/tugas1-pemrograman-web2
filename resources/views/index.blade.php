@@ -1,4 +1,26 @@
 <x-layout title="Data Anggota">
+    <div class="card shadow-sm">
+
+        <div class="card-body">
+
+            <h1 class="mb-3">
+                Data Keanggotaan HIMTI
+            </h1>
+
+            <p>
+                Selamat datang di aplikasi pendataan anggota HIMTI.
+            </p>
+
+        </div>
+
+    </div>
+
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
 
     <div class="card">
         <div class="card-header bg-danger text-white">
@@ -22,7 +44,7 @@
 
                 <tbody>
 
-                    @forelse($anggotas as $anggota)
+                    @foreach($anggotas as $anggota)
 
                         <tr class="text-center">
                             <td>{{ $loop->iteration }}</td>
@@ -32,16 +54,9 @@
                             <td>{{ $anggota->angkatan }}</td>
                             <td>{{ $anggota->no_hp }}</td>
                         </tr>
+                    @endforeach
 
-                    @empty
-
-                        <tr>
-                            <td colspan="5" class="text-center">
-                                Data anggota belum ada
-                            </td>
-                        </tr>
-
-                    @endforelse
+                   
 
                 </tbody>
 
