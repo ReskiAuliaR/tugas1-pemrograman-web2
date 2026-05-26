@@ -20,6 +20,15 @@
         {{ session('success') }}
     </div>
 @endif
+@if($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
 
 
     <div class="card">
@@ -39,6 +48,7 @@
                         <th>Alamat</th>
                         <th>Angkatan</th>
                         <th>No HP</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
 
@@ -53,6 +63,19 @@
                             <td>{{ $anggota->alamat }}</td>
                             <td>{{ $anggota->angkatan }}</td>
                             <td>{{ $anggota->no_hp }}</td>
+                            <td>
+                                <a href="{{ route('edit', $anggota->id) }}" class="btn btn-sm btn-warning">
+                                    Edit
+                                </a>
+                                {{-- <form action="{{ route('destroy', $anggota->id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                        Hapus
+                                    </button>
+                                </form> --}}
+                            </td>
                         </tr>
                     @endforeach
 
