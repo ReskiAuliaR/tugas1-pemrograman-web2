@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+<nav class="navbar navbar-expand-lg navbar-dark bg-danger mb-5">
     <div class="container">
 
         <a class="navbar-brand d-flex align-items-center gap-2" href="{{ route('index') }}">
@@ -18,7 +18,7 @@
 
         <div class="navbar-nav ms-auto">
             <a href="{{ route('create') }}" class="nav-link text-white">
-                Tambah Anggota
+                + Anggota
             </a>
         </div>
 
