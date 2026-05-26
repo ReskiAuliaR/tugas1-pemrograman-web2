@@ -75,6 +75,7 @@
             <button type="submit" class="btn btn-danger">
                 Simpan
             </button>
+            <a href="{{ route('index') }}">Kembali</a>
 
         </form>
 

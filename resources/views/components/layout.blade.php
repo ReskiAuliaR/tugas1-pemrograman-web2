@@ -20,6 +20,9 @@
             <a href="{{ route('create') }}" class="nav-link text-white">
                 + Anggota
             </a>
+            <a href="{{ route('divisi.index') }}" class="nav-link text-white">
+                Divisi
+            </a>
         </div>
 
     </div>
