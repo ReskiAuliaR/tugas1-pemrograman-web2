@@ -7,14 +7,26 @@ use Illuminate\Http\Request;
 
 class AnggotaController extends Controller
 {
-     public function index()
+    public function index(Request $request)
     {
-        $anggotas = Anggota::all();
+        $search = $request->search;
+
+        $anggotas = Anggota::when($search, function ($query) use ($search) {
+
+            $query->where('nama', 'like', '%' . $search . '%')
+                  ->orWhere('nim', 'like', '%' . $search . '%')
+                  ->orWhere('alamat', 'like', '%' . $search . '%')
+                  ->orWhere('angkatan', 'like', '%' . $search . '%')
+                  ->orWhere('no_hp', 'like', '%' . $search . '%');
+
+
+        })->paginate(10);
 
         return view('index', [
             'anggotas' => $anggotas
         ]);
     }
+    
 
     public function create()
     {

@@ -2,27 +2,24 @@
 
 namespace Database\Factories;
 
-use App\Models\Anggota;
+use App\Models\Divisi;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends Factory<Anggota>
- */
 class AnggotaFactory extends Factory
 {
     /**
      * Define the model's default state.
-     *
-     * @return array<string, mixed>
      */
     public function definition(): array
     {
-         return [
+        return [
             'nama' => fake()->name(),
-            'nim' => fake()->numerify('2##########'),
+            'nim' => fake()->numerify('22####'),
             'alamat' => fake()->address(),
-            'angkatan' => fake()->numberBetween(2009, 2026),
+            'angkatan' => fake()->year(),
             'no_hp' => fake()->phoneNumber(),
+
+            'divisi_id' => Divisi::inRandomOrder()->first()->id,
         ];
     }
 }

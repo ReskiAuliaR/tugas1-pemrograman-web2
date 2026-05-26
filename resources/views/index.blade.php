@@ -1,91 +1,68 @@
-<x-layout title="Data Anggota">
-    <div class="card shadow-sm">
+<x-layout title="Data Anggota HIMTI">
 
-        <div class="card-body">
+<div class="card">
 
-            <h1 class="mb-3">
-                Data Keanggotaan HIMTI
-            </h1>
+    <div class="card-header bg-danger text-white">
+        Data Anggota HIMTI
+    </div>
 
-            <p>
-                Selamat datang di aplikasi pendataan anggota HIMTI.
-            </p>
+    <div class="card-body">
 
-        </div>
+        <form action="{{ route('index') }}" method="GET" class="mb-3">
+
+            <div class="row">
+
+                <div class="col-md-10">
+                    <input type="text" name="search" class="form-control" placeholder="Cari nama atau NIM..." value="{{ request('search') }}"
+                    >
+                </div>
+
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-danger w-100">
+                        Cari
+                    </button>
+                </div>
+
+            </div>
+
+        </form>
+
+        <table class="table table-bordered">
+
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>NIM</th>
+                    <th>Alamat</th>
+                    <th>Angkatan</th>
+                    <th>No HP</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach($anggotas as $anggota)
+
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $anggota->nama }}</td>
+                    <td>{{ $anggota->nim }}</td>
+                    <td>{{ $anggota->alamat }}</td>
+                    <td>{{ $anggota->angkatan }}</td>
+                    <td>{{ $anggota->no_hp }}</td>
+                </tr>
+
+                @endforeach
+
+            </tbody>
+
+        </table>
+
+        {{ $anggotas->links() }}
 
     </div>
 
-    @if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
-@if($errors->any())
-<div class="alert alert-danger">
-    <ul>
-        @foreach($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
 </div>
-@endif
-
-
-    <div class="card">
-        <div class="card-header bg-danger text-white">
-            Data Anggota HIMTI 2009-2026
-        </div>
-
-        <div class="card-body">
-
-            <table class="table table-bordered table-striped">
-
-                <thead class="text-center">
-                    <tr>
-                        <th>No</th>
-                        <th>Nama</th>
-                        <th>NIM</th>
-                        <th>Alamat</th>
-                        <th>Angkatan</th>
-                        <th>No HP</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-
-                    @foreach($anggotas as $anggota)
-
-                        <tr class="text-center">
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $anggota->nama }}</td>
-                            <td>{{ $anggota->nim }}</td>
-                            <td>{{ $anggota->alamat }}</td>
-                            <td>{{ $anggota->angkatan }}</td>
-                            <td>{{ $anggota->no_hp }}</td>
-                            <td>
-                                <a href="{{ route('edit', $anggota->id) }}" class="btn btn-sm btn-warning">
-                                    Edit
-                                </a>
-                                <form action="{{ route('destroy', $anggota->id) }}" method="POST" class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-
-                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
-                                        Hapus
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
-
-                   
-
-                </tbody>
-
-            </table>
-
-        </div>
-    </div>
 
 </x-layout>
