@@ -13,3 +13,6 @@ Route::put('/update/{anggota}', [AnggotaController::class, 'update'])->name('upd
 Route::delete('/destroy/{id}', [AnggotaController::class, 'destroy'])->name('destroy');
 
 Route::resource('divisi', DivisiController::class);
+Route::get('/divisi/create', [DivisiController::class, 'create'])->name('divisi.create');
+Route::post('/divisi/store', [DivisiController::class, 'store'])->name('divisi.store');
+

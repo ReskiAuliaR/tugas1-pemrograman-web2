@@ -36,7 +36,12 @@
             Data divisi HIMTI 2009-2026
         </div>
 
+        
+
         <div class="card-body">
+            <a href="{{ route('divisi.create') }}" class="btn btn-danger mb-3">
+    Tambah Divisi
+</a>
 
             <table class="table table-bordered table-striped">
 
