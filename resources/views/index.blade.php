@@ -100,21 +100,20 @@
             Edit
         </a>
 
-        <form action="{{ route('destroy',$anggota->id) }}" method="POST">
+       <form action="{{ route('destroy',$anggota->id) }}" method="POST">
 
-            @csrf
-            @method('DELETE')
+    @csrf
+    @method('DELETE')
 
-            <button type="submit"
-                onclick="return confirm('Yakin ingin hapus?')"
-                class="btn btn-danger btn-sm">
+    <button type="submit"
+        onclick="return confirm('Yakin ingin hapus?')"
+        class="btn btn-danger btn-sm">
 
-                Hapus
+        Hapus
 
-            </button>
+    </button>
 
-        </form>
-
+</form>
     </div>
 
 </td>
