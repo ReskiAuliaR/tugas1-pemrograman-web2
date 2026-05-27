@@ -48,18 +48,30 @@ class DivisiController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(divisi $divisi)
-    {
-        //
-    }
+    public function edit(Divisi $divisi)
+{
+    return view('divisi.edit', [
+        'divisi' => $divisi
+    ]);
+}
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, divisi $divisi)
-    {
-        //
-    }
+   public function update(Request $request, Divisi $divisi)
+{
+    $validate = $request->validate([
+        'nama_divisi' => 'required|string|max:255',
+        'ketua_divisi' => 'required|string|max:255',
+        'deskripsi' => 'required|string|max:255',
+    ]);
+
+    $divisi->update($validate);
+
+    return redirect()
+        ->route('divisi.index')
+        ->withSuccess('Data divisi berhasil di edit!');
+}
 
     /**
      * Remove the specified resource from storage.

@@ -10,11 +10,10 @@ class Divisi extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nama_divisi',
-        'ketua_divisi',
-        'deskripsi'
-    ];
-
+    'nama_divisi',
+    'ketua_divisi',
+    'deskripsi'
+];
     public function anggotas()
     {
         return $this->hasMany(Anggota::class);
