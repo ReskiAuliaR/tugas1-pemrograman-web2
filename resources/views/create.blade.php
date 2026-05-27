@@ -72,6 +72,32 @@
                 @enderror
             </div>
 
+            <div class="mb-3">
+
+    <label class="form-label">
+        Divisi
+    </label>
+
+    <select name="divisi_id" class="form-select">
+
+        <option value="">
+            Pilih Divisi
+        </option>
+
+        @foreach($divisis as $divisi)
+
+            <option value="{{ $divisi->id }}">
+
+                {{ $divisi->nama_divisi }}
+
+            </option>
+
+        @endforeach
+
+    </select>
+
+</div>
+
             <button type="submit" class="btn btn-danger">
                 Simpan
             </button>

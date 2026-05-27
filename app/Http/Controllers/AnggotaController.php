@@ -9,7 +9,9 @@ use Illuminate\Http\Request;
 class AnggotaController extends Controller
 {
    public function index(Request $request)
+
 {
+   
     $search = $request->search;
 
     $anggotas = Anggota::with('divisi')
@@ -41,10 +43,11 @@ class AnggotaController extends Controller
     
 
     public function create()
-    {
-        return view('create');
-
-    }
+{
+    return view('create',[
+        'divisis'=>Divisi::all()
+    ]);
+}
 
     public function store(Request $request)
     {
@@ -54,6 +57,7 @@ class AnggotaController extends Controller
             'alamat' => 'required',
             'angkatan' => 'required',
             'no_hp' => 'required|max:13',
+            'divisi_id' => 'required|exists:divisis,id',
         ],
         [
             'nama.required' => 'Nama wajib diisi',
@@ -63,6 +67,8 @@ class AnggotaController extends Controller
             'angkatan.required' => 'Angkatan wajib diisi',
             'no_hp.required' => 'No HP wajib diisi',
             'no_hp.max' => 'No HP tidak boleh lebih dari 13 karakter',
+            'divisi_id.required' => 'Divisi wajib dipilih',
+            'divisi_id.exists' => 'Divisi yang dipilih tidak valid',
         ]);
 
         Anggota::create($validated);
