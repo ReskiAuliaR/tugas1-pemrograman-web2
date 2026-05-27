@@ -40,6 +40,10 @@
                     <td>{{ $anggota->divisi->nama_divisi }}</td>
                 </tr>
                 <tr>
+                    <th>Email</th>
+                    <td>{{ $anggota->email }}</td>
+                </tr>
+                <tr>
                     <th>Dibuat Pada</th>
                     <td>{{ $anggota->created_at }}</td>
                 </tr>

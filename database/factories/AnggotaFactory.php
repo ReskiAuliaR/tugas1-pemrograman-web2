@@ -18,6 +18,7 @@ class AnggotaFactory extends Factory
             'alamat' => fake()->address(),
             'angkatan' => fake()->year(),
             'no_hp' => fake()->phoneNumber(),
+            'email' => fake()->unique()->safeEmail(),
 
             'divisi_id' => Divisi::inRandomOrder()->first()->id,
         ];

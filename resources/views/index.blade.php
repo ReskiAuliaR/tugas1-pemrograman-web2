@@ -75,6 +75,7 @@
                     <th>Angkatan</th>
                     <th>No HP</th>
                     <th>Divisi</th>
+                    <th>Email</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -91,6 +92,7 @@
                     <td>{{ $anggota->angkatan }}</td>
                     <td>{{ $anggota->no_hp }}</td>
                     <td>{{ $anggota->divisi->nama_divisi }}</td>
+                    <td>{{ $anggota->email }}</td>
                     <td>
 
     <div class="d-flex gap-2 justify-content-center">

@@ -94,6 +94,7 @@ class AnggotaController extends Controller
             'angkatan' => 'required',
             'no_hp' => 'required|max:15',
             'divisi_id' => 'required|exists:divisis,id',
+            'email' => 'required|email|max:255',
         ],
         [
             'nama.required' => 'Nama wajib diisi',
@@ -105,6 +106,9 @@ class AnggotaController extends Controller
             'no_hp.max' => 'No HP tidak boleh lebih dari 13 karakter',
             'divisi_id.required' => 'Divisi wajib dipilih',
             'divisi_id.exists' => 'Divisi yang dipilih tidak valid',
+            'email.required' => 'Email wajib diisi',
+            'email.email' => 'Format email tidak valid',
+            'email.max' => 'Email tidak boleh lebih dari 255 karakter',
         ]);
     
         Anggota::where('id', $anggota)->update($validated);
