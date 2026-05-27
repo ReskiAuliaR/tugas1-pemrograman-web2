@@ -52,26 +52,34 @@
 
                             <td>
 
-                                <div class="d-flex flex-column gap-2 align-items-center">
+     <div class="d-flex gap-2 justify-content-center">
 
-                                    <a href="{{ route('divisi.edit',$divisi->id) }}" class="btn btn-warning btn-sm">
-                                        Edit
-                                    </a>
+        <a href="{{ route('divisi.show',$divisi->id) }}" class="btn btn-info btn-sm">
+            Detail
+        </a>
 
-                                    <form action="{{ route('divisi.destroy',$divisi->id) }}" method="POST">
+        <a href="{{ route('divisi.edit',$divisi->id) }}" class="btn btn-warning btn-sm">
+            Edit
+        </a>
 
-                                        @csrf
-                                        @method('DELETE')
+        <form action="{{ route('divisi.destroy',$divisi->id) }}" method="POST">
 
-                                        <button type="submit" onclick="return confirm('Yakin ingin hapus?')"class="btn btn-danger btn-sm">
-                                            Hapus
-                                        </button>
+            @csrf
+            @method('DELETE')
 
-                                    </form>
+            <button type="submit"
+                onclick="return confirm('Yakin ingin hapus?')"
+                class="btn btn-danger btn-sm">
 
-                                </div>
+                Hapus
 
-                            </td>
+            </button>
+
+        </form>
+
+    </div>
+
+</td>
 
                         </tr>
 

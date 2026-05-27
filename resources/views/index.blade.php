@@ -37,6 +37,7 @@
                     <th>Alamat</th>
                     <th>Angkatan</th>
                     <th>No HP</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
 
@@ -51,6 +52,33 @@
                     <td>{{ $anggota->alamat }}</td>
                     <td>{{ $anggota->angkatan }}</td>
                     <td>{{ $anggota->no_hp }}</td>
+                    <td>
+
+    <div class="d-flex gap-2 justify-content-center">
+
+
+        <a href="{{ route('edit',$anggota->id) }}" class="btn btn-warning btn-sm">
+            Edit
+        </a>
+
+        <form action="{{ route('destroy',$anggota->id) }}" method="POST">
+
+            @csrf
+            @method('DELETE')
+
+            <button type="submit"
+                onclick="return confirm('Yakin ingin hapus?')"
+                class="btn btn-danger btn-sm">
+
+                Hapus
+
+            </button>
+
+        </form>
+
+    </div>
+
+</td>
                 </tr>
 
                 @endforeach

@@ -40,10 +40,12 @@ class DivisiController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(divisi $divisi)
-    {
-        //
-    }
+   public function show(Divisi $divisi)
+{
+    return view('divisi.show',[
+        'divisi'=>$divisi->load('anggotas')
+    ]);
+}
 
     /**
      * Show the form for editing the specified resource.
