@@ -16,4 +16,5 @@ Route::resource('divisi', DivisiController::class);
 Route::get('/divisi/create', [DivisiController::class, 'create'])->name('divisi.create');
 Route::post('/divisi/store', [DivisiController::class, 'store'])->name('divisi.store');
 Route::delete('/destroy/{anggota}',[AnggotaController::class,'destroy'])->name('destroy');
+Route::get('/show/{anggota}',[AnggotaController::class,'show'])->name('show');
 

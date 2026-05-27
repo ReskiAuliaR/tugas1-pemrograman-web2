@@ -121,5 +121,11 @@ class AnggotaController extends Controller
         ->route('index')
         ->with('success','Data anggota berhasil dihapus');
 }
+public function show(Anggota $anggota)
+{
+    return view('show',[
+        'anggota'=>$anggota
+    ]);
+}
     
 }

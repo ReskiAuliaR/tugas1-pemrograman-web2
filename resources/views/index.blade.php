@@ -95,6 +95,9 @@
 
     <div class="d-flex gap-2 justify-content-center">
 
+        <a href="{{ route('show',$anggota->id) }}" class="btn btn-info btn-sm">
+    Detail
+        </a>
 
         <a href="{{ route('edit',$anggota->id) }}" class="btn btn-warning btn-sm">
             Edit
