@@ -2,7 +2,7 @@
 
 <div class="card">
 
-    <div class="card-header bg-success text-white">
+    <div class="card-header bg-danger text-white">
         Tambah Divisi
     </div>
 
