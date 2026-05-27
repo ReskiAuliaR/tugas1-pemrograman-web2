@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Anggota;
 use App\Models\Divisi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AnggotaController extends Controller
 {
@@ -50,31 +51,50 @@ class AnggotaController extends Controller
 }
 
     public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'nama' => 'required',
-            'nim' => 'required|max:11',
-            'alamat' => 'required',
-            'angkatan' => 'required',
-            'no_hp' => 'required|max:13',
-            'divisi_id' => 'required|exists:divisis,id',
-        ],
-        [
-            'nama.required' => 'Nama wajib diisi',
-            'nim.required' => 'NIM wajib diisi',
-            'nim.max' => 'NIM tidak boleh lebih dari 11 karakter',
-            'alamat.required' => 'Alamat wajib diisi',
-            'angkatan.required' => 'Angkatan wajib diisi',
-            'no_hp.required' => 'No HP wajib diisi',
-            'no_hp.max' => 'No HP tidak boleh lebih dari 13 karakter',
-            'divisi_id.required' => 'Divisi wajib dipilih',
-            'divisi_id.exists' => 'Divisi yang dipilih tidak valid',
-        ]);
+{
+    $validated = $request->validate([
+        'nama'=>'required',
+        'email'=>'required|email',
+        'nim'=>'required|max:11',
+        'alamat'=>'required',
+        'angkatan'=>'required',
+        'no_hp'=>'required|max:13',
+        'divisi_id'=>'required|exists:divisis,id',
+    ],
+    [
+        'nama.required'=>'Nama wajib diisi',
+        'email.required'=>'Email wajib diisi',
+        'email.email'=>'Format email tidak valid',
+        'nim.required'=>'NIM wajib diisi',
+        'nim.max'=>'NIM tidak boleh lebih dari 11 karakter',
+        'alamat.required'=>'Alamat wajib diisi',
+        'angkatan.required'=>'Angkatan wajib diisi',
+        'no_hp.required'=>'No HP wajib diisi',
+        'no_hp.max'=>'No HP tidak boleh lebih dari 13 karakter',
+        'divisi_id.required'=>'Divisi wajib dipilih',
+    ]);
+
+    DB::beginTransaction();
+
+    try {
 
         Anggota::create($validated);
-        return redirect()->route('index')->with('success', 'Data anggota berhasil ditambahkan');
+
+        DB::commit();
+
+        return redirect()
+            ->route('index')
+            ->with('success','Data anggota berhasil ditambahkan');
+
+    } catch (\Exception $e) {
+
+        DB::rollBack();
+
+        return back()
+            ->with('error','Data anggota gagal ditambahkan');
 
     }
+}
 
     public function edit(Anggota $anggota)
 {
