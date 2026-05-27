@@ -51,21 +51,38 @@
                             <td>{{ $anggota->deleted_at }}</td>
                             <td>
 
-                <form action="{{ route('restore',$anggota->id) }}" method="POST">
+    <div class="d-flex gap-2">
 
-                @csrf
-                @method('PUT')
+        <form action="{{ route('restore',$anggota->id) }}" method="POST">
 
-                <button type="submit" class="btn btn-success btn-sm">
+            @csrf
+            @method('PUT')
 
-                    Restore
+            <button type="submit" class="btn btn-success btn-sm">
+                Restore
+            </button>
 
-                </button>
+        </form>
 
-            </form>
-            
-                            </td>
+        <form action="{{ route('forceDelete',$anggota->id) }}" method="POST">
 
+            @csrf
+            @method('DELETE')
+
+            <button type="submit"
+                onclick="return confirm('Yakin ingin hapus permanen?')"
+                class="btn btn-danger btn-sm">
+
+                Hapus Permanen
+
+            </button>
+
+        </form>
+
+    </div>
+
+</td>
+                            
                                 
 
                         </tr>

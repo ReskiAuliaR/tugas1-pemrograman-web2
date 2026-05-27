@@ -184,5 +184,14 @@ public function restore($id)
         ->route('trash')
         ->with('success','Data anggota berhasil direstore');
 }
-    
+    public function forceDelete($id)
+{
+    Anggota::onlyTrashed()
+        ->where('id',$id)
+        ->forceDelete();
+
+    return redirect()
+        ->route('trash')
+        ->with('success','Data anggota berhasil dihapus permanen');
+}
 }
