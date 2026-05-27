@@ -3,29 +3,41 @@
 namespace App\Http\Controllers;
 
 use App\Models\Anggota;
+use App\Models\Divisi;
 use Illuminate\Http\Request;
 
 class AnggotaController extends Controller
 {
-    public function index(Request $request)
-    {
-        $search = $request->search;
+   public function index(Request $request)
+{
+    $search = $request->search;
 
-        $anggotas = Anggota::when($search, function ($query) use ($search) {
+    $anggotas = Anggota::with('divisi')
 
-            $query->where('nama', 'like', '%' . $search . '%')
-                  ->orWhere('nim', 'like', '%' . $search . '%')
-                  ->orWhere('alamat', 'like', '%' . $search . '%')
-                  ->orWhere('angkatan', 'like', '%' . $search . '%')
-                  ->orWhere('no_hp', 'like', '%' . $search . '%');
+        ->when($search,function($query) use ($search){
 
+            $query->where('nama','like','%'.$search.'%')
+                  ->orWhere('nim','like','%'.$search.'%')
+                  ->orWhere('alamat','like','%'.$search.'%')
+                  ->orWhere('angkatan','like','%'.$search.'%')
+                  ->orWhere('no_hp','like','%'.$search.'%');
 
-        })->paginate(10);
+        })
 
-        return view('index', [
-            'anggotas' => $anggotas
-        ]);
-    }
+        ->when($request->divisi,function($query) use ($request){
+
+            $query->where('divisi_id',$request->divisi);
+
+        })
+
+        ->latest()
+        ->paginate(10);
+
+    return view('index',[
+        'anggotas'=>$anggotas,
+        'divisis'=>Divisi::all(),
+    ]);
+}
     
 
     public function create()

@@ -2,7 +2,7 @@
 
     <div class="card">
 
-        <div class="card-header bg-info text-white">
+        <div class="card-header bg-danger text-white">
             Detail Divisi HIMTI
         </div>
 

@@ -10,22 +10,52 @@
 
         <form action="{{ route('index') }}" method="GET" class="mb-3">
 
-            <div class="row">
+    <div class="row g-2">
 
-                <div class="col-md-10">
-                    <input type="text" name="search" class="form-control" placeholder="Cari nama atau NIM..." value="{{ request('search') }}"
-                    >
-                </div>
+        <div class="col-md-5">
 
-                <div class="col-md-2">
-                    <button type="submit" class="btn btn-danger w-100">
-                        Cari
-                    </button>
-                </div>
+            <input type="text"
+                name="search"
+                class="form-control"
+                placeholder="Cari nama atau NIM..."
+                value="{{ request('search') }}">
 
-            </div>
+        </div>
 
-        </form>
+        <div class="col-md-5">
+
+            <select name="divisi" class="form-select">
+
+                <option value="">
+                    Semua Divisi
+                </option>
+
+                @foreach($divisis as $divisi)
+
+                    <option value="{{ $divisi->id }}"
+                        {{ request('divisi') == $divisi->id ? 'selected' : '' }}>
+
+                        {{ $divisi->nama_divisi }}
+
+                    </option>
+
+                @endforeach
+
+            </select>
+
+        </div>
+
+        <div class="col-md-2">
+
+            <button type="submit" class="btn btn-danger w-100">
+                Cari
+            </button>
+
+        </div>
+
+    </div>
+
+</form>
 
         <table class="table table-bordered">
 
@@ -37,6 +67,7 @@
                     <th>Alamat</th>
                     <th>Angkatan</th>
                     <th>No HP</th>
+                    <th>Divisi</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -52,6 +83,7 @@
                     <td>{{ $anggota->alamat }}</td>
                     <td>{{ $anggota->angkatan }}</td>
                     <td>{{ $anggota->no_hp }}</td>
+                    <td>{{ $anggota->divisi->nama_divisi }}</td>
                     <td>
 
     <div class="d-flex gap-2 justify-content-center">
