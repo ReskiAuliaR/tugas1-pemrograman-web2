@@ -175,5 +175,14 @@ public function trash()
         'anggotas'=>$anggotas
     ]);
 }
+public function restore($id)
+{
+    Anggota::onlyTrashed()
+        ->where('id',$id)->restore();
+
+    return redirect()
+        ->route('trash')
+        ->with('success','Data anggota berhasil direstore');
+}
     
 }

@@ -18,4 +18,5 @@ Route::post('/divisi/store', [DivisiController::class, 'store'])->name('divisi.s
 Route::delete('/destroy/{anggota}',[AnggotaController::class,'destroy'])->name('destroy');
 Route::get('/show/{anggota}',[AnggotaController::class,'show'])->name('show');
 Route::get('/trash',[AnggotaController::class,'trash'])->name('trash');
+Route::put('/restore/{id}',[AnggotaController::class,'restore'])->name('restore');
 

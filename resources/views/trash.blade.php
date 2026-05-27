@@ -1,5 +1,12 @@
 <x-layout title="Trash Anggota HIMTI">
 
+ @if (session('success'))
+
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+     
+ @endif
     <div class="card">
 
         <div class="card-header bg-dark text-white">
@@ -24,6 +31,7 @@
                         <th>NIM</th>
                         <th>Divisi</th>
                         <th>Dihapus Pada</th>
+                        <th>Aksi</th>
 
                     </tr>
 
@@ -41,6 +49,24 @@
                             <td>{{ $anggota->nim }}</td>
                             <td>{{ $anggota->divisi->nama_divisi }}</td>
                             <td>{{ $anggota->deleted_at }}</td>
+                            <td>
+
+                <form action="{{ route('restore',$anggota->id) }}" method="POST">
+
+                @csrf
+                @method('PUT')
+
+                <button type="submit" class="btn btn-success btn-sm">
+
+                    Restore
+
+                </button>
+
+            </form>
+            
+                            </td>
+
+                                
 
                         </tr>
 
