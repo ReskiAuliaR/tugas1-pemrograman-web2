@@ -43,6 +43,28 @@
     <label class="form-label">No HP</label>
     <input type="text" name="no_hp" class="form-control" value="{{ $anggota->no_hp }}">
 </div>
+<div class="mb-3">
+
+    <label class="form-label">
+        Divisi
+    </label>
+
+    <select name="divisi_id" class="form-select">
+
+        @foreach($divisis as $divisi)
+
+            <option value="{{ $divisi->id }}"
+                {{ $anggota->divisi_id == $divisi->id ? 'selected' : '' }}>
+
+                {{ $divisi->nama_divisi }}
+
+            </option>
+
+        @endforeach
+
+    </select>
+
+</div>
 
 <button type="submit" class="btn btn-warning">
     Update

@@ -80,7 +80,9 @@ class AnggotaController extends Controller
 {
     return view('edit', [
         'title' => 'Edit Data Anggota',
-        'anggota' => $anggota
+        'anggota' => $anggota,
+        
+        'divisis' => Divisi::all(),
     ]);
 }
     public function update(Request $request, $anggota)
@@ -91,6 +93,7 @@ class AnggotaController extends Controller
             'alamat' => 'required',
             'angkatan' => 'required',
             'no_hp' => 'required|max:15',
+            'divisi_id' => 'required|exists:divisis,id',
         ],
         [
             'nama.required' => 'Nama wajib diisi',
@@ -100,6 +103,8 @@ class AnggotaController extends Controller
             'angkatan.required' => 'Angkatan wajib diisi',
             'no_hp.required' => 'No HP wajib diisi',
             'no_hp.max' => 'No HP tidak boleh lebih dari 13 karakter',
+            'divisi_id.required' => 'Divisi wajib dipilih',
+            'divisi_id.exists' => 'Divisi yang dipilih tidak valid',
         ]);
     
         Anggota::where('id', $anggota)->update($validated);
