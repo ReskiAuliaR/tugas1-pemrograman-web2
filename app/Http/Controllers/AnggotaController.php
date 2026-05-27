@@ -105,37 +105,51 @@ class AnggotaController extends Controller
         'divisis' => Divisi::all(),
     ]);
 }
-    public function update(Request $request, $anggota)
-    {
-        $validated = $request->validate([
-            'nama' => 'required',
-            'nim' => 'required|max:11',
-            'alamat' => 'required',
-            'angkatan' => 'required',
-            'no_hp' => 'required|max:15',
-            'divisi_id' => 'required|exists:divisis,id',
-            'email' => 'required|email|max:255',
-        ],
-        [
-            'nama.required' => 'Nama wajib diisi',
-            'nim.required' => 'NIM wajib diisi',
-            'nim.max' => 'NIM tidak boleh lebih dari 11 karakter',
-            'alamat.required' => 'Alamat wajib diisi',
-            'angkatan.required' => 'Angkatan wajib diisi',
-            'no_hp.required' => 'No HP wajib diisi',
-            'no_hp.max' => 'No HP tidak boleh lebih dari 13 karakter',
-            'divisi_id.required' => 'Divisi wajib dipilih',
-            'divisi_id.exists' => 'Divisi yang dipilih tidak valid',
-            'email.required' => 'Email wajib diisi',
-            'email.email' => 'Format email tidak valid',
-            'email.max' => 'Email tidak boleh lebih dari 255 karakter',
-        ]);
-    
-        Anggota::where('id', $anggota)->update($validated);
+    public function update(Request $request,$anggota)
+{
+    $validated = $request->validate([
+        'nama'=>'required',
+        'email'=>'required|email',
+        'nim'=>'required|max:11',
+        'alamat'=>'required',
+        'angkatan'=>'required',
+        'no_hp'=>'required|max:15',
+        'divisi_id'=>'required|exists:divisis,id',
+    ],
+    [
+        'nama.required'=>'Nama wajib diisi',
+        'email.required'=>'Email wajib diisi',
+        'email.email'=>'Format email tidak valid',
+        'nim.required'=>'NIM wajib diisi',
+        'nim.max'=>'NIM tidak boleh lebih dari 11 karakter',
+        'alamat.required'=>'Alamat wajib diisi',
+        'angkatan.required'=>'Angkatan wajib diisi',
+        'no_hp.required'=>'No HP wajib diisi',
+        'no_hp.max'=>'No HP tidak boleh lebih dari 13 karakter',
+        'divisi_id.required'=>'Divisi wajib dipilih',
+    ]);
 
-        
-        return redirect()->route('index')->with('success', 'Data anggota berhasil diperbarui');
-    }       
+    DB::beginTransaction();
+
+    try {
+
+        Anggota::where('id',$anggota)->update($validated);
+
+        DB::commit();
+
+        return redirect()
+            ->route('index')
+            ->with('success','Data anggota berhasil diperbarui');
+
+    } catch (\Exception $e) {
+
+        DB::rollBack();
+
+        return back()
+            ->with('error','Data anggota gagal diperbarui');
+
+    }
+}       
 
     public function destroy($id)
 {
@@ -151,5 +165,6 @@ public function show(Anggota $anggota)
         'anggota'=>$anggota
     ]);
 }
+
     
 }
