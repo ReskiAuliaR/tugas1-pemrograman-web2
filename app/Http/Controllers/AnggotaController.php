@@ -34,7 +34,7 @@ class AnggotaController extends Controller
         })
 
         ->latest()
-        ->paginate(10);
+        ->paginate(10) ->withQueryString();
 
     return view('index',[
         'anggotas'=>$anggotas,
@@ -165,6 +165,15 @@ public function show(Anggota $anggota)
         'anggota'=>$anggota
     ]);
 }
+public function trash()
+{
+    $anggotas = Anggota::onlyTrashed()
+        ->latest()
+        ->paginate(10)->withQueryString();
 
+    return view('trash',[
+        'anggotas'=>$anggotas
+    ]);
+}
     
 }

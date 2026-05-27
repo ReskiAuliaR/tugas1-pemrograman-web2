@@ -23,6 +23,9 @@
             <a href="{{ route('divisi.index') }}" class="nav-link text-white">
                 Divisi
             </a>
+            <a href="{{ route('trash') }}" class="nav-link text-white">
+                Trash
+            </a>
         </div>
 
     </div>

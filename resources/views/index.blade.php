@@ -85,7 +85,7 @@
                 @foreach($anggotas as $anggota)
 
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
+                  <td>{{ $anggotas->firstItem() + $loop->index }}</td>
                     <td>{{ $anggota->nama }}</td>
                     <td>{{ $anggota->nim }}</td>
                     <td>{{ $anggota->alamat }}</td>
